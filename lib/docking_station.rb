@@ -16,8 +16,9 @@ class DockingStation
     bikes.pop
   end
 
-  def dock(bike)
+  def dock(bike, broken: nil)
     fail 'Capacity limit reached' if full?
+    bike.mark_as_broken if broken
     bikes << bike
   end
 

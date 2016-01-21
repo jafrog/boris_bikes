@@ -22,7 +22,7 @@ describe DockingStation do
     end
 
     it 'raises an error when no bikes available' do
-      expect{subject.release_bike}.to raise_error 'No bikes available'
+      expect{ subject.release_bike }.to raise_error 'No bikes available'
     end
   end
 
@@ -35,6 +35,11 @@ describe DockingStation do
     it 'raises an error if bike is already docked' do
       DockingStation::DEFAULT_CAPACITY.times { subject.dock(bike) }
       expect { subject.dock(bike) }.to raise_error 'Capacity limit reached'
+    end
+
+    it 'reports broken bikes' do
+      subject.dock(bike, broken: true)
+      expect(subject.bikes.first).to be_broken
     end
   end
 end

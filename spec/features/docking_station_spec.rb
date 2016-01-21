@@ -18,4 +18,9 @@ describe 'Docking Station' do
     10.times { docking_station.dock bike }
     expect { docking_station.dock(bike) }.to raise_error 'Capacity limit reached'
   end
+
+  it 'allows to report broken bikes' do
+    docking_station.dock(bike, broken: true)
+    expect(docking_station.bikes.first).to be_broken
+  end
 end
