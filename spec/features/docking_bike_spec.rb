@@ -14,7 +14,7 @@ describe 'Docking a bike in a docking station' do
   end
 
   it 'docks up to 20 bikes' do
-    20.times { docking_station.dock(Bike.new) }
+    DockingStation::DEFAULT_CAPACITY.times { docking_station.dock(Bike.new) }
     expect(docking_station.bikes.count).to eq 20
   end
 
