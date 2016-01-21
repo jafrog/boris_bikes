@@ -21,6 +21,13 @@ describe 'Docking Station' do
 
   it 'allows to report broken bikes' do
     docking_station.dock(bike, broken: true)
-    expect(docking_station.bikes.first).to be_broken
+    expect(docking_station.bikes).to be_empty
+  end
+
+  it 'does not release broken bikes' do
+    docking_station.dock(bike)
+    docking_station.dock(Bike.new, broken: true)
+
+    expect(docking_station.release_bike).to eq bike
   end
 end
