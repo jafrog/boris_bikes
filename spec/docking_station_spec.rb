@@ -21,5 +21,10 @@ describe DockingStation do
       subject.dock(bike)
       expect(subject.bike).to eq(bike)
     end
+
+    it 'raises an error if bike is already docked' do
+      subject.dock(bike)
+      expect { subject.dock(bike) }.to raise_error 'Capacity limit reached'
+    end
   end
 end
