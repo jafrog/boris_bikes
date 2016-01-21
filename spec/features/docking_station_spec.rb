@@ -1,6 +1,6 @@
 require 'docking_station'
 
-describe 'Docking a bike in a docking station' do
+describe 'Docking Station' do
   subject(:docking_station) { DockingStation.new }
   let(:bike) { Bike.new }
 
@@ -13,9 +13,9 @@ describe 'Docking a bike in a docking station' do
     expect(docking_station.bikes).to include bike
   end
 
-  it 'docks up to 20 bikes' do
-    DockingStation::DEFAULT_CAPACITY.times { docking_station.dock(Bike.new) }
-    expect(docking_station.bikes.count).to eq 20
+  it 'does not allow to dock more bikes than its capacity' do
+    docking_station = DockingStation.new(10)
+    10.times { docking_station.dock bike }
+    expect { docking_station.dock(bike) }.to raise_error 'Capacity limit reached'
   end
-
 end

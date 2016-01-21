@@ -5,16 +5,26 @@ describe DockingStation do
 
  it { is_expected.to respond_to :release_bike }
 
- describe '#release_bike' do
-  it 'releases working bikes' do
-    subject.dock(bike)
-    expect(subject.release_bike).to be_working
+  describe '#initialize' do
+    it 'is initialized with a capacity' do
+      expect(DockingStation.new(10).capacity).to eq 10
+    end
+
+    it 'is initialized with a default capacity if no arguments were provided' do
+      expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
+    end
   end
 
-  it 'raises an error when no bikes available' do
-    expect{subject.release_bike}.to raise_error 'No bikes available'
+  describe '#release_bike' do
+    it 'releases working bikes' do
+      subject.dock(bike)
+      expect(subject.release_bike).to be_working
+    end
+
+    it 'raises an error when no bikes available' do
+      expect{subject.release_bike}.to raise_error 'No bikes available'
+    end
   end
- end
 
   describe '#dock' do
     it 'docks a bike' do
