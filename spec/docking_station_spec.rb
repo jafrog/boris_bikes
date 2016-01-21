@@ -19,11 +19,11 @@ describe DockingStation do
   describe '#dock' do
     it 'docks a bike' do
       subject.dock(bike)
-      expect(subject.bike).to eq(bike)
+      expect(subject.bikes).to include(bike)
     end
 
     it 'raises an error if bike is already docked' do
-      subject.dock(bike)
+      20.times { subject.dock(bike) }
       expect { subject.dock(bike) }.to raise_error 'Capacity limit reached'
     end
   end
